@@ -8,8 +8,8 @@
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{amsfonts}
-\usepackage{amsthm}
 \usepackage{amsmath}
+\usepackage{amsthm}
 
 \setdefaultlanguage{czech}
 \setmainfont{TeX Gyre Termes}
@@ -41,10 +41,12 @@
 	\includegraphics[width=0.12\columnwidth]{images/fjfi.png}
 }
 
+\date{5. února 2020}
+
 \author[Marek Dědič]
 {
 	Marek~Dědič\inst{1}\inst{2} \\
-	Školitel:~Ing.~Tomáš~Pevný,~Ph.D.\inst{3}\inst{4}
+	Školitel:~Doc.~Ing.~Tomáš~Pevný,~Ph.D.\inst{3}\inst{4}
 }
 
 \institute[FJFI ČVUT v Praze]
@@ -67,32 +69,30 @@
 	\titlepage
 \end{frame}
 
-\begin{frame}{Obsah}
-	\tableofcontents
-\end{frame}
-
 % Body
 
-\section{Úloha \& Motivace}
-
-\begin{frame}{Úloha}
-	Hledání zobrazení úloh do prostorů, ve kterých je lze shlukovat.
-\end{frame}
-
-\begin{frame}{Úloha}
-	Hledání zobrazení multi-instančních úloh do prostorů, ve kterých je lze shlukovat.
-\end{frame}
-
-\begin{frame}{Úloha}
-	Hledání zobrazení multi-instančních úloh do prostorů, ve kterých je lze shlukovat pomocí metod strojového učení.
-\end{frame}
+\section{Motivace \& Úloha}
 
 \begin{frame}{Motivace}
 	\begin{itemize}
-		\item Umožnit shlukování a následnou klasifikaci IP adres
-		\item Využít struktury dat pomocí multi-instančního učení
-		\item Vyzkoušet unsupervised metody
+		\item Shluková analýza je jedním z nejzákladnějších problémů učení bez učitele.
+		\item Klíčovou složkou návrhu shlukovacího algoritmu je volba vzdálenostní metriky a pro složitější úlohy je často obtížné najít správnou metriku.
+		\item Multi-instanční učení je způsobem, jak efektivně konstruovat komplexní hierarchické modely cílené na specifickou úlohu.
+		\item V diplomové práci byly představeny a srovnány 3 přístupy multi-instanční shlukové analýzy.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Úloha}
+	\begin{itemize}
+		\item Síťová bezpečnost je atraktivní aplikací navržených metod.
+		\item Cílem práce bylo umožnit shlukování domén 2. řádu podle aktivity klientů, kteří se na ně připojují.
+		\item Úspěšné shlukování může výrazně podpořit práci síťových analytiků.
+		\item Možné budoucí rozšíření na šifrovaná data se stoupajícím šifrováním základních protokolů.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Obsah}
+	\tableofcontents
 \end{frame}
 
 \section{MIL}
