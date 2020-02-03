@@ -10,6 +10,10 @@
 \usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{subcaption}
+\usepackage[backend=biber,style=iso-authoryear,sortlocale=en_US,autolang=other,bibencoding=UTF8]{biblatex}
+
+\addbibresource{zotero.bib}
 
 \setdefaultlanguage{czech}
 \setmainfont{TeX Gyre Termes}
@@ -30,6 +34,8 @@
 \makeatletter
 \newcommand*{\currentSection}{\@currentlabelname}
 \makeatother
+
+\newcommand{\mathmat}{\ensuremath{\mathbf}}
 
 \title[Optimalizace vzdálenosti pro multi-instanční shlukovací problémy]
 {
@@ -120,45 +126,58 @@
 \section{Contrastive predictive coding}
 
 \begin{frame}{Contrastive predictive coding}
-	Původní vyjádření přístupu pomocí constractive predictive coding jako ztrátové funkce
-	\[ \log \left\lVert f \left( B_n^{(1)} \right) - f \left( B_n^{(2)} \right) \right\rVert^2 - \log \sum_{j = 1}^K \left\lVert f \left( B_n^{(1)} \right) - f \left( B'_j \right) \right\rVert^2 \]
-\end{frame}
-
-\begin{frame}{Contrastive predictive coding}
-	Později zjednodušeno na
-	\[ D_{ij} = \left\lVert f \left( B_i^{(1)} \right) - f \left( B_j^{(2)} \right) \right\rVert_2^2 \]
-	\[ \frac{1}{n} \sum_{i = 1}^n \left( \log \left( D_{ii} \right) - \log \left( \sum_{i \neq j} D_{ij} \right) \right) \]
-\end{frame}
-
-\begin{frame}{Contrastive predictive coding - předběžné výsledky (Musk2)}
-	\centering
-	\includegraphics[width=0.7\pagewidth]{images/CPC.png}
+	Vyjádření přístupu pomocí constractive predictive coding jako ztrátové funkce
+	\[ \mathmat{D}_{ij} = \left\lVert \phi \left( B_i^{(1)} \right) - \phi \left( B_j^{(2)} \right) \right\rVert_2^2 \]
+	\[ L_\mathrm{CPC} = \frac{1}{n} \sum_{i = 1}^n \left( \log \left( \mathmat{D}_{ii} \right) - \log \sum_{\substack{j = 1 \\ j \neq i}}^n \mathmat{D}_{ij} \right) \]
 \end{frame}
 
 \section{Triplet loss}
 
 \begin{frame}{Triplet loss}
 	Triplet loss je alternativou vyžadující supervised přístup
-	\[ y_{ij} =
+	\[ \mathmat{y}_{ij} =
 \begin{cases}
-	1 &\text{for} \quad y_i = y_j \\
-	0 &\text{otherwise}
+	1 &\text{pro} \quad y_i = y_j \\
+	0 &\text{jinak}
 \end{cases}
 \]
-\[ \sum_{ij} y_{ij} D_{ij} + c \sum_{ijl} y_{ij} \left( 1 - y_{il} \right) \max \left( 0, 1 + D_{ij} - D_{il} \right) \]
-\end{frame}
-
-\begin{frame}{Triplet loss - předběžné výsledky (Musk2)}
-	\centering
-	\includegraphics[width=0.7\pagewidth]{images/triplet.png}
+\[ \mathmat{\eta}_{ij} = \begin{cases}
+		1 &\text{pokud taška } B_j \text{ je cílovým sousedem tašky } B_i \\
+		0 &\text{jinak}
+  \end{cases} \]
+\[ L_\mathrm{triplet} = \sum_{ij} \eta_{ij} \mathmat{D}_{ij} + c \sum_{ijl} \eta_{ij} \left( 1 - \mathmat{y}_{il} \right) \left\{ \mathmat{D}_{il} - \mathmat{D}_{ij} \right\}_+ \]
 \end{frame}
 
 \section{Magnet loss}
 
-\begin{frame}{Magnet loss - předběžné výsledky (Musk2)}
-	Magnet loss je vylepšenou verzí triplet loss, využívající více sousedních vzorků.
-	\centering
-	\includegraphics[width=0.65\pagewidth]{images/magnet.png}
+\begin{frame}
+	\begin{figure}[h]
+		\centering
+		\begin{subfigure}[b]{0.18\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/triplet-magnet-difference/triplet_before.pdf}
+			\caption{Triplet loss: před}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.18\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/triplet-magnet-difference/triplet_after.pdf}
+			\caption{Triplet loss: po}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.18\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/triplet-magnet-difference/magnet_before.pdf}
+			\caption{Magnet loss: před}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}[b]{0.18\textwidth}
+			\centering
+			\includegraphics[width=\textwidth]{images/triplet-magnet-difference/magnet_after.pdf}
+			\caption{Magnet loss: po}
+		\end{subfigure}
+		\caption{Vizualizace rozdílu mezi triplet loss a magnet loss. Obrázek z \cite{rippel_metric_2015}}
+	\end{figure}
 \end{frame}
 
 \section{Závěr}
