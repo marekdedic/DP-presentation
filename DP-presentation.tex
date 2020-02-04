@@ -247,16 +247,70 @@
     \centering
     \begin{tabular}{lr}
       \toprule
-      \( c \)          & Přesnost \\
+      \( c \)    & Přesnost \\
       \midrule
-      \( 0.01 \)       & 0.864 \\
-      \( 0.1 \)        & \textbf{0.882} \\
-      \( \mathbf{1} \) & \textbf{0.882} \\
-      \( 10 \)         & 0.864 \\
-      \( 100 \)        & 0.873 \\
+      0.01       & 0.864 \\
+      0.1        & \textbf{0.882} \\
+      \textbf{1} & \textbf{0.882} \\
+      10         & 0.864 \\
+      100        & 0.873 \\
       \bottomrule
     \end{tabular}
-    \caption{Přesnost klasifikace pro různé hodnoty hyperparametru \( c \)}\label{tab:cisco-accuracy}
+    \caption{Přesnost klasifikace triplet loss pro různé hodnoty hyperparametru \( c \).}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \begin{table}
+    \centering
+    \begin{tabular}{lr}
+      \toprule
+      \( K \)    & Přesnost \\
+      \midrule
+      \textbf{2} & \textbf{0.845} \\
+      3          & 0.800 \\
+      5          & 0.791 \\
+      8          & 0.818 \\
+      16         & 0.800 \\
+      20         & 0.836 \\
+      \bottomrule
+    \end{tabular}
+    \caption{Přesnost klasifikace magnet loss pro různé hodnoty hyperparametru \( K \).}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \begin{table}
+    \centering
+    \begin{tabular}{lr}
+      \toprule
+      \( \alpha \) & Přesnost \\
+      \midrule
+      \textbf{0}   & \textbf{0.791} \\
+      0.1          & 0.764 \\
+      0.5          & 0.773 \\
+      1            & 0.782 \\
+      \bottomrule
+    \end{tabular}
+    \caption{Přesnost klasifikace magnet loss pro různé hodnoty hyperparametru \( \alpha \).}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \begin{table}
+    \centering
+    \begin{tabular}{lr}
+      \toprule
+      Frekvence   & Přesnost \\
+      \midrule
+      5           & 0.755 \\
+      10          & 0.818 \\
+      \textbf{25} & \textbf{0.845} \\
+      70          & \textbf{0.845} \\
+      130         & 0.827 \\
+      \bottomrule
+    \end{tabular}
+    \caption{Přesnost klasifikace magnet loss pro různé hodnoty frekvence obnovování shluků.}
   \end{table}
 \end{frame}
 
