@@ -12,6 +12,7 @@
 \usepackage{amsthm}
 \usepackage{subcaption}
 \usepackage[backend=biber,style=iso-authoryear,sortlocale=en_US,autolang=other,bibencoding=UTF8]{biblatex}
+\usepackage{booktabs}
 
 \addbibresource{zotero.bib}
 
@@ -37,7 +38,7 @@
 
 \newcommand{\mathmat}{\ensuremath{\mathbf}}
 
-\title[Optimalizace vzdálenosti pro multi-instanční shlukovací problémy]
+\title[Optimalizace vzdálenosti pro MIL shlukování]
 {
 	Optimalizace vzdálenosti pro multi-instanční shlukovací problémy
 }
@@ -180,14 +181,83 @@
 	\end{figure}
 \end{frame}
 
+\section{Výsledky}
+
+\begin{frame}{Standardní datasety}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.55\textwidth]{images/toy-ratio/toy-ratio.pdf}
+		\caption{Poměr průměrné vzdálenosti mezi shluky a průměrné vzdálenosti ve shlucích}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Standardní datasety}
+  \begin{table}[h]
+    \begin{tabular}{lrrr}
+      \toprule
+      Dataset          & CPC            & Triplet loss   & Magnet loss \\
+      \midrule
+      BrownCreeper     & \textbf{0.900} & 0.836          & 0.818 \\
+      Musk2            & 0.750          & \textbf{1.0}   & 0.650 \\
+      Mutagenesis2     & 0.708          & \textbf{0.750} & 0.500 \\
+      Web3             & 0.733          & \textbf{0.867} & 0.533 \\
+      \bottomrule
+    \end{tabular}
+    \caption{Přesnost klasifikace}
+  \end{table}
+\end{frame}
+
+\begin{frame}{Korporátní dataset}
+  \begin{table}
+    \centering
+    \begin{tabular}{lrrr}
+      \toprule
+      Klasifikační problém & CPC   & Triplet loss & Magnet loss \\
+      \midrule
+      2 třídy              & 0.920 & 0.910        & \textbf{0.930} \\
+      20 tříd              & 0.893 & 0.868        & \textbf{0.904} \\
+      \bottomrule
+    \end{tabular}
+    \caption{Přesnost klasifikace}\label{tab:cisco-accuracy}
+  \end{table}
+\end{frame}
+
 \section{Závěr}
 
 \begin{frame}{Závěr}
 	\begin{itemize}
-		\item Vyzkoušeno několik přístuplů ke shlukování dat
-		\item Aplikováno multi-instanční učení na problém shlukování dat
-		\item Porovnání přístupů na veřejně dostupných standardních datasetech.
+		\item Představeny a vyzkoušeny 3 přístupy k multi-instančnímu shlukování dat
+		\item Přístupy byly porovnány na veřejně dostupných standardních datasetech a na korporátním datasetu.
+		\item Na standardních datasetech měla nejlepší výsledky triplet loss, na korporátním datasetu magnet loss.
+		\item Metoda CPC měla slabé výsledky v porovnání s ostatními metodami, avšak CPC je jediná unsupervised metoda.
+		\item Žádný z výsledků nedosáhl původního očekávání.
+		\item Je třeba další výzkum, zvláště pak metody CPC.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Vyjádření k posudku oponenta}
+  \begin{itemize}
+    \item Vysoká výpočetní náročnost Hledání optimálních parametrů.
+    \item Parametry specifické pro metodu, ne pro dataset.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{table}
+    \centering
+    \begin{tabular}{lr}
+      \toprule
+      \( c \)          & Přesnost \\
+      \midrule
+      \( 0.01 \)       & 0.864 \\
+      \( 0.1 \)        & \textbf{0.882} \\
+      \( \mathbf{1} \) & \textbf{0.882} \\
+      \( 10 \)         & 0.864 \\
+      \( 100 \)        & 0.873 \\
+      \bottomrule
+    \end{tabular}
+    \caption{Přesnost klasifikace pro různé hodnoty hyperparametru \( c \)}\label{tab:cisco-accuracy}
+  \end{table}
 \end{frame}
 
 \end{document}
